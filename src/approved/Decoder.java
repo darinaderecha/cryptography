@@ -1,16 +1,15 @@
 package com;
 
 public abstract class Decoder {
+    //общий класс для проверки лексем
 
-
-
-
-        public  String decodingArray(int cipherKey, String text){
+       //метод для перекодировки всех chars в тексте
+        public  String decodingCharactersInText(int cipherKey, String text){
         char[] decodingArray = text.toCharArray();
         StringBuilder b = new StringBuilder(decodingArray.length);
         for (int i = 0; i < decodingArray.length; i++) {
             decodingArray[i] = (char) (decodingArray[i] - cipherKey);
-            if (decodingArray[i] < 'А') {
+            if (decodingArray[i] < 'А') {//здесь я пожертвовала символами препинания, сравнивала знаки по char кодировке
                 decodingArray[i] = ' ';
             } else if (decodingArray[i]!=0) {
                 b.append(decodingArray[i]);
