@@ -34,34 +34,9 @@ public class Encrypter {
 
 
         }
-        System.out.println(sentenceBuilder);
+
         return String.valueOf(sentenceBuilder);
     }
 }
 
-
-//        List<String> al = alphabet.ordinaryAlphabet();
-//        char[] charsFromMessage = originalText.toCharArray();
-//        StringBuilder builder = new StringBuilder(message.length());
-//
-//        for (int i = 0; i < charsFromMessage.length; i++) {
-//            for (int j = 0; j < al.size(); j++) {
-//
-//                if(al.get(j) == charsFromMessage[i]){
-//                    if(j >= al.size() - cipherKey){
-//                        charsFromMessage[i] = al.get(j - al.size() - 1 + cipherKey);
-//                    } else {
-//                        charsFromMessage[i] = al.get(j + cipherKey);
-//                    }
-//                    builder.append(charsFromMessage[i]);
-//                    break;
-//                }
-//
-//            }
-//
-//        }
-//        return String.valueOf(builder);
-//
-//
-//    }
 

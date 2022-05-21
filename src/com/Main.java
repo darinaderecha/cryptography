@@ -6,8 +6,11 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws IOException {
        Scanner s = new Scanner(System.in);
-        Encrypter en = new Encrypter();
-        en.encrypt(s.nextLine());
+//        Encrypter en = new Encrypter();
+//        en.encrypt(s.nextLine());
+        FileChanger changer = new FileChanger(EncodeDecodeWays.DECODE_BY_BRUTE_FORCE);
+        changer.getTargetFile();
+
 
 
 //        StatisticAnalysisDecoder decoder = new StatisticAnalysisDecoder();

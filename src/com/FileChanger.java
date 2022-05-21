@@ -16,6 +16,7 @@ public class FileChanger {
     Scanner console = new Scanner(System.in);
     EncodeDecodeWays ways;
     Encrypter encrypt = new Encrypter();
+    BruteForceDecoder decoder = new BruteForceDecoder();
     File src;
     File dst;
 
@@ -24,28 +25,33 @@ public class FileChanger {
         this.ways = ways;
     }
 
-    
+
     public File getTargetFile() throws IOException {
         String line;
         src = new File(String.valueOf(Path.of(console.nextLine())));
-        BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(src)));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(String.valueOf(dst)));
-        while ((line = reader.readLine()) != null) {
-            switch (ways) {
-                case ENCRYPT -> {
-                    writer.write(encrypt.encrypt(line));
+        dst = new File(String.valueOf(Path.of(src.getParent()) + "\\XX" + src.getName()));
+        try (
+                BufferedReader reader = new BufferedReader(new FileReader(String.valueOf(src)));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(String.valueOf(dst)))
+        ) {
+            while ((line = reader.readLine()) != null) {
+                switch (ways) {
+                    case ENCRYPT -> {
+                        writer.write(encrypt.encrypt(line));
+                        writer.write("\n");
+                    }
+                case DECODE_BY_BRUTE_FORCE -> {
+                    writer.write(decoder.decodeByBruteForce(line));
                     writer.write("\n");
+
                 }
-//                case DECODE_BY_BRUTE_FORCE -> {
-//                    writer.write(decoder.decodeByBruteForce(s));
-//
-//                }
 
+                }
             }
-        }
 
-        reader.close();
-        return dst;
+            reader.close();
+            return dst;
+        }
     }
 }
 
