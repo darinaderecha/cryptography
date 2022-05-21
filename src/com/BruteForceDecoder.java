@@ -8,10 +8,9 @@ public class BruteForceDecoder extends Decoder {
 
 
     public String decodeByBruteForce(String text) {
-        while (wrongTokens != -1 || cipherKey == 100) { //проверка на правильность подбора шифра и вообще подходит ли
-                                                        // шифра и вообще подходит ли
+        while (wrongTokens != -1 || cipherKey == 100) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
             cipherKey++;
-
+            StringBuilder builder = new StringBuilder();
             String[] tokens = decodingArray(cipherKey,text).split(" ");
             for (int i = 0; i < tokens.length; i++) {
                 if ((!doesStartCorrectly(tokens[i]) || haveLotVowelsOrConsonantsTogether(tokens[i])
@@ -22,11 +21,13 @@ public class BruteForceDecoder extends Decoder {
             if (wrongTokens == 0) {
                 wrongTokens--;
                 decodedText = decodingArray(cipherKey, text);
+
+
             } else  {
                 wrongTokens = 0;
             }
 
-
+          decodedText = String.valueOf(builder.append(decodedText));
         }
 
         return decodedText;

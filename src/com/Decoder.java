@@ -2,15 +2,19 @@ package com;
 
 public abstract class Decoder {
 
-    public  String decodingArray(int cipherKey, String text){
+
+
+
+        public  String decodingArray(int cipherKey, String text){
         char[] decodingArray = text.toCharArray();
         StringBuilder b = new StringBuilder(decodingArray.length);
         for (int i = 0; i < decodingArray.length; i++) {
             decodingArray[i] = (char) (decodingArray[i] - cipherKey);
             if (decodingArray[i] < 'А') {
                 decodingArray[i] = ' ';
+            } else if (decodingArray[i]!=0) {
+                b.append(decodingArray[i]);
             }
-            b.append(decodingArray[i]);
         }
         return String.valueOf(b);
     }
