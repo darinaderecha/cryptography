@@ -2,28 +2,41 @@ package com;
 
 import com.Alphabet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Decoder {
     Alphabet alphabet = new Alphabet();
+    List<String> decodedLines;
     //общий класс для проверки лексем
 
        //метод для перекодировки всех chars в тексте
         public  String decodingCharactersInText(int cipherKey, String text){
         char[] decodingArray = text.toCharArray();
-        StringBuilder b = new StringBuilder();
+        decodedLines = new ArrayList<>();
         for (int i = 0; i < decodingArray.length; i++) {
-            if (Character.isLetter(decodingArray[i])) {//здесь я пожертвовала символами препинания, сравнивала знаки по char кодировке
-                int index = alphabet.ordinaryAlphabet().indexOf(decodingArray[i]);
-                decodingArray[i] = alphabet.ordinaryAlphabet().get(index + cipherKey);
+            if (Character.isLetter(decodingArray[i])) {
+                int index = alphabet.smallLettersList().indexOf(decodingArray[i]);
+                if(index > alphabet.smallLettersList().size() - 1 - cipherKey){
+                    decodingArray[i] = alphabet.smallLettersList().get(index + cipherKey - alphabet.smallLettersList().size());
+                } else {
+                    decodingArray[i] = alphabet.smallLettersList().get(index + cipherKey);
+                }
 
+            } else if(Character.isSpaceChar(decodingArray[i])){
+                decodingArray[i] = ' ';
             }
+            //
         }
-        return String.valueOf(b);
+
+
+        return null;
     }
 
     public static boolean doesStartCorrectly(String tokens){
         if (tokens.startsWith("Ы") || tokens.startsWith("Ь")
                 || tokens.startsWith("ь") || tokens.startsWith("Ъ")
-                || tokens.startsWith("ъ")) {
+                || tokens.startsWith("ъ") || tokens.startsWith("ы")) {
             return false;
         }
         return true;

@@ -7,8 +7,10 @@ import java.util.TreeMap;
 
 public class Alphabet {
 
-    public List<Character> alphabets;
-    public  List<Character> smallLettersList;
+    public static List<Character> alphabets;
+    public  static List<Character> smallLettersList;
+    public static List<Character> bigLetterList;
+    List<Character> points;
 
     public List<Character> ordinaryAlphabet() {
         alphabets = new ArrayList<>();
@@ -19,7 +21,6 @@ public class Alphabet {
         }
         alphabets.add(6, 'Ё');
         alphabets.add(38, 'ё');
-
         return alphabets;
 
     }
@@ -27,6 +28,21 @@ public class Alphabet {
         alphabets = ordinaryAlphabet();
         return smallLettersList = alphabets.subList(alphabets.indexOf('а'), alphabets.size());
 
+    }
+    public List<Character> bigLetterList(){
+        alphabets = ordinaryAlphabet();
+        return  bigLetterList = alphabets.subList(alphabets.indexOf('А'), alphabets.indexOf('а'));
+    }
+    List<Character> points(){
+        points = new ArrayList<>();
+        points.add('.');
+        points.add(',');
+        points.add('?');
+        points.add('!');
+        points.add(':');
+        points.add('"');
+        points.add(';');
+        return points;
     }
 
 
