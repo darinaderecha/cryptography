@@ -13,6 +13,7 @@ import java.util.Scanner;
 //TODO: FIX FILE WRITER
 
 public class FileChanger {
+
     Scanner console = new Scanner(System.in);
     EncodeDecodeWays ways;
     Encrypter encrypt = new Encrypter();

@@ -6,8 +6,6 @@ public class Encrypter {
     private final static int cipherKey = 10;
     Alphabet alphabet = new Alphabet();
 
-    // здесь текст зашифровуется с с учетом регистра, то есть "р" маленькая
-    // и "Р" большая будут означать разные символы.
     public String encrypt(String originalText) {
         String[] words = originalText.split(" ");
         StringBuilder wordsBuilder = new StringBuilder();// один стрингбилдер чтобы складывать буквы в слова
@@ -17,14 +15,21 @@ public class Encrypter {
             for (int j = 0; j < wordsChars.length; j++) {// цикл для букв
                 if (Character.isLetter(wordsChars[j])) {
                     char temp = wordsChars[j];
-                    int index = alphabet.ordinaryAlphabet().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
-                    if (index < cipherKey) {
-                        index = alphabet.ordinaryAlphabet().size() - 1 - cipherKey;
+                    temp = Character.toLowerCase(temp);
+                       int indexOfAlphabet = alphabet.smallLettersList().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
+                        if (indexOfAlphabet < cipherKey) {
+                            temp = alphabet.smallLettersList().get
+                                    (indexOfAlphabet - cipherKey + alphabet.smallLettersList().size());
+                        }else {
+                            temp = alphabet.smallLettersList().get(indexOfAlphabet - cipherKey);
+                        }
+                        if(Character.isTitleCase(wordsChars[j])) {
+                        wordsChars[j] = Character.toUpperCase(temp);
+                        }else{
+                            wordsChars[j] = temp;
                     }
-                    wordsChars[j] = alphabet.ordinaryAlphabet().get(index - cipherKey);
-                } else if (Character.isSpaceChar(wordsChars[j])) {
-                    wordsChars[j] = ' ';
                 }
+
                 wordsBuilder.append(wordsChars[j]);
 
             }
@@ -34,7 +39,7 @@ public class Encrypter {
 
 
         }
-
+        System.out.println(sentenceBuilder);
         return String.valueOf(sentenceBuilder);
     }
 }

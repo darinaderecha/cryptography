@@ -7,8 +7,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
        Scanner s = new Scanner(System.in);
 //        Encrypter en = new Encrypter();
+       // Alphabet a = new Alphabet();
 //        en.encrypt(s.nextLine());
-        FileChanger changer = new FileChanger(EncodeDecodeWays.DECODE_BY_BRUTE_FORCE);
+        FileChanger changer = new FileChanger(EncodeDecodeWays.ENCRYPT);
         changer.getTargetFile();
 
 

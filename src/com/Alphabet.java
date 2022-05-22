@@ -8,6 +8,7 @@ import java.util.TreeMap;
 public class Alphabet {
 
     public List<Character> alphabets;
+    public  List<Character> smallLettersList;
 
     public List<Character> ordinaryAlphabet() {
         alphabets = new ArrayList<>();
@@ -20,6 +21,12 @@ public class Alphabet {
         alphabets.add(38, 'ё');
 
         return alphabets;
+
+    }
+    public List<Character> smallLettersList(){
+        alphabets = ordinaryAlphabet();
+        return smallLettersList = alphabets.subList(alphabets.indexOf('а'), alphabets.size());
+
     }
 
 
