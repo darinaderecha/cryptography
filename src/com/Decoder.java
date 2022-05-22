@@ -1,38 +1,30 @@
 package com;
 
-import com.Alphabet;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public abstract class Decoder {
+public  class Decoder implements ForDifferentChars {
     Alphabet alphabet = new Alphabet();
-    List<String> decodedLines;
-    //общий класс для проверки лексем
+    StringBuilder builder = new StringBuilder();
+    int key;
 
-       //метод для перекодировки всех chars в тексте
+
+    //метод для перекодировки всех chars в тексте
+    // на вход получает строку и подобранный ключ, на выход передвет строку, которую я использую в BruteForceDecoder
         public  String decodingCharactersInText(int cipherKey, String text){
         char[] decodingArray = text.toCharArray();
-        decodedLines = new ArrayList<>();
         for (int i = 0; i < decodingArray.length; i++) {
-            if (Character.isLetter(decodingArray[i])) {
-                int index = alphabet.smallLettersList().indexOf(decodingArray[i]);
-                if(index > alphabet.smallLettersList().size() - 1 - cipherKey){
-                    decodingArray[i] = alphabet.smallLettersList().get(index + cipherKey - alphabet.smallLettersList().size());
-                } else {
-                    decodingArray[i] = alphabet.smallLettersList().get(index + cipherKey);
-                }
-
-            } else if(Character.isSpaceChar(decodingArray[i])){
-                decodingArray[i] = ' ';
+            char temp = decodingArray[i];
+            key = cipherKey;
+            if(Character.isUpperCase(temp)){
+                forBigLetters(temp);
+            } else if (Character.isLowerCase(temp)) {
+                forSmallLetters(temp);
+            } else {
+                forOtherCharacters(temp);
             }
-            //
+           builder.append(temp);
         }
-
-
-        return null;
+        return String.valueOf(builder);
     }
-
+ // здесь методы проверки лексем, которые одинаково подходят для двух методов
     public static boolean doesStartCorrectly(String tokens){
         if (tokens.startsWith("Ы") || tokens.startsWith("Ь")
                 || tokens.startsWith("ь") || tokens.startsWith("Ъ")
@@ -55,5 +47,38 @@ public abstract class Decoder {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public Character forBigLetters(char temp) {
+        int index = alphabet.bigLetterList().indexOf(temp);
+        if(index > alphabet.bigLetterList().size() - 1 - key){
+            temp = alphabet.bigLetterList().get(index + key - alphabet.bigLetterList().size());
+        } else {
+            temp = alphabet.bigLetterList().get(index + key);
+        }
+        return temp;
+    }
+
+    @Override
+    public Character forSmallLetters(char temp) {
+        int index = alphabet.smallLettersList().indexOf(temp);
+        if(index > alphabet.smallLettersList().size() - 1 - key){
+            temp = alphabet.smallLettersList().get(index + key - alphabet.smallLettersList().size());
+        } else {
+            temp = alphabet.smallLettersList().get(index + key);
+        }
+        return temp;
+    }
+
+
+
+    @Override
+    public Character forOtherCharacters(char temp) {
+        if(Character.isDigit(temp) || alphabet.points().contains(temp)){
+            //wordsBuilder.append(temp);
+
+        }
+        return temp;
     }
 }

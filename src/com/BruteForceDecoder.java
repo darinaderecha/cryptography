@@ -1,14 +1,14 @@
 package com;
 
-public class BruteForceDecoder extends Decoder {
-    private int cipherKey = 0;
+public class BruteForceDecoder extends Decoder  {
+    private int cipherKey = 12;
     int wrongTokens = 0;
     String decodedText = null;
 
 
 
     public String decodeByBruteForce(String text) {
-        while (wrongTokens != -1 || cipherKey == 100) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
+        while (wrongTokens != -1 || cipherKey == alphabet.smallLettersList().size() - 1) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
             cipherKey++;
             StringBuilder builder = new StringBuilder();
             String[] tokens = decodingCharactersInText(cipherKey,text).split(" ");
@@ -32,7 +32,6 @@ public class BruteForceDecoder extends Decoder {
 
         return decodedText;
     }
-
 
 
 }

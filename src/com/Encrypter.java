@@ -1,11 +1,6 @@
 package com;
 
-import com.Alphabet;
-
-import java.util.ArrayList;
-import java.util.List;
-
-public class Encrypter {
+public class Encrypter implements ForDifferentChars{
     private final static int cipherKey = 10;
     Alphabet alphabet = new Alphabet();
     StringBuilder wordsBuilder = new StringBuilder();// один стрингбилдер чтобы складывать буквы в слова
@@ -18,11 +13,11 @@ public class Encrypter {
                 for (int j = 0; j < wordsChars.length; j++) {// цикл для букв
                         char temp = wordsChars[j];
                         if (Character.isUpperCase(temp)) {
-                            bigLetterEncoder(temp);
+                            forBigLetters(temp);
                         } else if (Character.isLowerCase(temp)) {
-                            smallLettersEncoder(temp);
+                            forSmallLetters(temp);
                         } else {
-                            pointsEncoder(temp);
+                            forOtherCharacters(temp);
 
                         }
                     wordsChars[j] = temp;
@@ -37,8 +32,8 @@ public class Encrypter {
         System.out.println(encryptedText);
         return encryptedText;
     }
-
-    public Character smallLettersEncoder(char temp) {
+     @Override
+    public Character forSmallLetters(char temp) {
         int indexOfAlphabet = alphabet.smallLettersList().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
         if (indexOfAlphabet < cipherKey) {
             temp = alphabet.smallLettersList().get
@@ -49,8 +44,8 @@ public class Encrypter {
         wordsBuilder.append(temp);
         return temp;
     }
-
-    public Character bigLetterEncoder(char temp) {
+    @Override
+    public Character forBigLetters(char temp) {
         int indexOfAlphabet = alphabet.bigLetterList().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
         if (indexOfAlphabet < cipherKey) {
             temp = alphabet.bigLetterList().get
@@ -62,14 +57,15 @@ public class Encrypter {
         return temp;
 
     }
-
-    public Character pointsEncoder(char temp){
+    @Override
+    public Character forOtherCharacters(char temp){
         if(Character.isDigit(temp) || alphabet.points().contains(temp)){
             wordsBuilder.append(temp);
 
         }
         return temp;
     }
+
 
 }
 
