@@ -2,10 +2,10 @@ package com;
 
 import java.util.Scanner;
 
-public class BruteForceDecoder extends Decoder  {
+public class BruteForceDecoder extends Decoder {
     Scanner scanner = new Scanner(System.in);
-    private int cipherKey = 9;
-    int wrongTokens = 0;
+    private int cipherKey = 0;
+    static int wrongTokens = 0;
 
 
     public int findCipherKey(int cipherKey, String text) {
@@ -14,25 +14,25 @@ public class BruteForceDecoder extends Decoder  {
             String[] tokens = decodingCharactersInText(this.cipherKey, text).split(" ");
             for (int i = 0; i < tokens.length; i++) {
                 if ((!doesStartCorrectly(tokens[i]) || haveLotVowelsOrConsonantsTogether(tokens[i])
-                       || hasNoVowelsInBigWord(tokens[i]))) {
+                        || hasNoVowelsInBigWord(tokens[i]))) {
                     wrongTokens++;
                 }
             }
             if (wrongTokens == 0) {
-                    wrongTokens--;
-            } else  {
+                wrongTokens--;
+            } else {
                 wrongTokens = 0;
             }
 
-                 }
+        }
 
         return cipherKey;
     }
-    public String decodeByBruteForce(String text){
+
+    public String decodeByBruteForce(String text) {
         int key = findCipherKey(cipherKey, text);
-        System.out.println(decodingCharactersInText(key, text));
-        return decodingCharactersInText(key, text);
+            return decodingCharactersInText(cipherKey, text);
+
+
     }
-
-
 }

@@ -2,14 +2,13 @@ package com;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+
 
 public class Alphabet {
 
-    public static List<Character> alphabets;
-    public  static List<Character> smallLettersList;
-    public static List<Character> bigLetterList;
+    public List<Character> alphabets;
+    public List<Character> smallLetters;
+    public List<Character> bigLetter;
     List<Character> points;
 
     public List<Character> ordinaryAlphabet() {
@@ -26,12 +25,12 @@ public class Alphabet {
     }
     public List<Character> smallLettersList(){
         alphabets = ordinaryAlphabet();
-        return smallLettersList = alphabets.subList(alphabets.indexOf('а'), alphabets.size());
+        return  alphabets.subList(alphabets.indexOf('а'), alphabets.size());
 
     }
     public List<Character> bigLetterList(){
         alphabets = ordinaryAlphabet();
-        return  bigLetterList = alphabets.subList(alphabets.indexOf('А'), alphabets.indexOf('а'));
+        return  alphabets.subList(alphabets.indexOf('А'), alphabets.indexOf('а'));
     }
     List<Character> points(){
         points = new ArrayList<>();
@@ -42,6 +41,7 @@ public class Alphabet {
         points.add(':');
         points.add('"');
         points.add(';');
+        points.add('-');
         return points;
     }
 

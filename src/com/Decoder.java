@@ -31,7 +31,7 @@ public  class Decoder implements ForDifferentChars {
         }
             String decryptedText = String.valueOf(sentenceBuilder);
             sentenceBuilder.delete(0, sentenceBuilder.length());
-            System.out.println(decryptedText);
+
             return decryptedText;
           
         }
@@ -67,8 +67,8 @@ public  class Decoder implements ForDifferentChars {
     @Override
     public Character forOtherCharacters(char temp) {
         if(Character.isDigit(temp) || alphabet.points().contains(temp)){
-        }
         wordsBuilder.append(temp);
+        }
         return temp;
     }
     // здесь методы проверки лексем, которые одинаково подходят для двух методов

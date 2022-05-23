@@ -1,12 +1,10 @@
 package com;
 
 import java.io.*;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-//TODO: FIX FILE WRITER
 
 public class FileChanger {
     Scanner console = new Scanner(System.in);
@@ -48,13 +46,11 @@ public class FileChanger {
                         writer.write("\n");
                         writer.flush();
                     }
-                    case DECODE_BY_STATISTIC_ANALYSIS -> {
-                    }
+                    default -> System.out.println("There is no method to proceed your file");
+
                 }
             }
 
-            reader.close();
-            writer.close();
             return dst;
         }
     }
