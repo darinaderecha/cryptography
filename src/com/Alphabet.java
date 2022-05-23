@@ -20,7 +20,7 @@ public class Alphabet {
             alphabets.add((char) i);
         }
         alphabets.add(6, 'Ё');
-        alphabets.add(38, 'ё');
+        alphabets.add(39, 'ё');
         return alphabets;
 
     }

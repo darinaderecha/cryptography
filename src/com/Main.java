@@ -8,6 +8,7 @@ public class Main {
         Scanner s = new Scanner(System.in);
         Alphabet a = new Alphabet();
         System.out.println(a.smallLettersList());
+        System.out.println(a.bigLetterList());
 //        Encrypter en = new Encrypter();
 //        en.encrypt(s.nextLine());
         FileChanger changer = new FileChanger(EncodeDecodeWays.DECODE_BY_BRUTE_FORCE);

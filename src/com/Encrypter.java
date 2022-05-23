@@ -13,9 +13,9 @@ public class Encrypter implements ForDifferentChars{
                 for (int j = 0; j < wordsChars.length; j++) {// цикл для букв
                         char temp = wordsChars[j];
                         if (Character.isUpperCase(temp)) {
-                            forBigLetters(temp);
+                            forBigLetters(temp, cipherKey);
                         } else if (Character.isLowerCase(temp)) {
-                            forSmallLetters(temp);
+                            forSmallLetters(temp, cipherKey);
                         } else {
                             forOtherCharacters(temp);
 
@@ -33,7 +33,7 @@ public class Encrypter implements ForDifferentChars{
         return encryptedText;
     }
      @Override
-    public Character forSmallLetters(char temp) {
+    public Character forSmallLetters(char temp, int cipherKey) {
         int indexOfAlphabet = alphabet.smallLettersList().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
         if (indexOfAlphabet < cipherKey) {
             temp = alphabet.smallLettersList().get
@@ -45,7 +45,7 @@ public class Encrypter implements ForDifferentChars{
         return temp;
     }
     @Override
-    public Character forBigLetters(char temp) {
+    public Character forBigLetters(char temp, int cipherKey) {
         int indexOfAlphabet = alphabet.bigLetterList().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
         if (indexOfAlphabet < cipherKey) {
             temp = alphabet.bigLetterList().get

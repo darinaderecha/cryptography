@@ -26,6 +26,7 @@ public class FileChanger {
     public File getTargetFile() throws IOException {
         String line;
         lines = new ArrayList<>();
+        System.out.println("Введите путь к файлу");
         src = new File(String.valueOf(Path.of(console.nextLine())));
         dst = new File(String.valueOf(Path.of(src.getParent()) + "\\XX" + src.getName()));
         try (
@@ -39,13 +40,17 @@ public class FileChanger {
                     case ENCRYPT -> {
                         writer.write(encrypt.encrypt(line));
                         writer.write("\n");
+                        writer.flush();
+
                     }
                     case DECODE_BY_BRUTE_FORCE -> {
+                        //decoder.decodeByBruteForce(line);
                         writer.write(decoder.decodeByBruteForce(line));
-                        writer.write("\n");
-
+                        //writer.write("\n");
+                        //writer.flush();
                     }
-
+                    case DECODE_BY_STATISTIC_ANALYSIS -> {
+                    }
                 }
             }
 
