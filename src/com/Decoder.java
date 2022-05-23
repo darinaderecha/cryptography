@@ -31,7 +31,6 @@ public  class Decoder implements ForDifferentChars {
         }
             String decryptedText = String.valueOf(sentenceBuilder);
             sentenceBuilder.delete(0, sentenceBuilder.length());
-
             System.out.println(decryptedText);
             return decryptedText;
           

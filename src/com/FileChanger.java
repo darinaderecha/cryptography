@@ -44,10 +44,9 @@ public class FileChanger {
 
                     }
                     case DECODE_BY_BRUTE_FORCE -> {
-                        //decoder.decodeByBruteForce(line);
                         writer.write(decoder.decodeByBruteForce(line));
-                        //writer.write("\n");
-                        //writer.flush();
+                        writer.write("\n");
+                        writer.flush();
                     }
                     case DECODE_BY_STATISTIC_ANALYSIS -> {
                     }
@@ -55,6 +54,7 @@ public class FileChanger {
             }
 
             reader.close();
+            writer.close();
             return dst;
         }
     }
