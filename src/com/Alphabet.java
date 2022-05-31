@@ -2,6 +2,7 @@ package com;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class Alphabet {
@@ -10,6 +11,7 @@ public class Alphabet {
     public List<Character> smallLetters;
     public List<Character> bigLetter;
     List<Character> points;
+
 
     public List<Character> ordinaryAlphabet() {
         alphabets = new ArrayList<>();

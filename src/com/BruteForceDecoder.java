@@ -1,11 +1,16 @@
 package com;
 
-import java.util.Scanner;
-
 public class BruteForceDecoder extends Decoder {
-    Scanner scanner = new Scanner(System.in);
+
     private int cipherKey = 0;
     static int wrongTokens = 0;
+
+    public String decodeByBruteForce(String text) {
+        int key = findCipherKey(cipherKey, text);
+        return decodingCharactersInText(cipherKey, text);
+
+
+    }
 
 
     public int findCipherKey(int cipherKey, String text) {
@@ -29,10 +34,5 @@ public class BruteForceDecoder extends Decoder {
         return cipherKey;
     }
 
-    public String decodeByBruteForce(String text) {
-        int key = findCipherKey(cipherKey, text);
-            return decodingCharactersInText(cipherKey, text);
 
-
-    }
 }

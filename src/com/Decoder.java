@@ -16,13 +16,7 @@ public  class Decoder implements ForDifferentChars {
             for (int j = 0; j < decodingCharsArray.length; j++) {
                 char temp = decodingCharsArray[j];
                 key = cipherKey;
-                if (Character.isUpperCase(temp)) {
-                    forBigLetters(temp, cipherKey);
-                } else if (Character.isLowerCase(temp)) {
-                    forSmallLetters(temp, cipherKey);
-                } else {
-                    forOtherCharacters(temp);
-                }
+                decoder(temp, key);
                 decodingCharsArray[j] = temp;
             }
             sentenceBuilder.append(wordsBuilder);
@@ -34,6 +28,21 @@ public  class Decoder implements ForDifferentChars {
 
             return decryptedText;
           
+        }
+
+        public void decoder(char temp, int cipherKey){
+            if (Character.isUpperCase(temp)) {
+                forBigLetters(temp, cipherKey);
+            } else if (Character.isLowerCase(temp)) {
+                forSmallLetters(temp, cipherKey);
+            } else {
+                forOtherCharacters(temp);
+            }
+
+        }
+
+        public int calculateWrongTokens(int wrong){
+
         }
 
     @Override
@@ -72,6 +81,7 @@ public  class Decoder implements ForDifferentChars {
         return temp;
     }
     // здесь методы проверки лексем, которые одинаково подходят для двух методов
+    //проверка чтобы текст не начинался с этих букв
     public static boolean doesStartCorrectly(String tokens){
         if (tokens.startsWith("Ы") || tokens.startsWith("Ь")
                 || tokens.startsWith("ь") || tokens.startsWith("Ъ")
@@ -80,6 +90,7 @@ public  class Decoder implements ForDifferentChars {
         }
         return true;
     }
+    //проверка на обилие гласных или согласных букв, которые не характерны для русского языка
     public static boolean haveLotVowelsOrConsonantsTogether(String tokens){
         String invalidRegex1 = "[АУИЄОЫЕЯауиэоыея+]{3}+";
         String invalidRegex2 = "[ЧСМТБЮЖДЛРПВФЙЦКНГШЩЗЪчсмтбджлрпвфйцкнгшщзхъ]{4}+";
@@ -88,10 +99,26 @@ public  class Decoder implements ForDifferentChars {
         }
         return false;
     }
+    //проверка на наличие гласных в больших словах
     public static boolean hasNoVowelsInBigWord(String tokens){
         String invalidRegex3 = "[^аяоиеэыюу]+";
         if(tokens.length() > 3 && tokens.matches(invalidRegex3)){
             return true;
+        }
+        return false;
+    }
+    //проверка на корректные прелоги, местоимения
+    public static boolean hasCorrectOneLetterWords(String tokens){
+            if(tokens.length() == 1 &&(tokens.equalsIgnoreCase("я") ||
+                    tokens.equalsIgnoreCase("о") ||
+                    tokens.equalsIgnoreCase("у") ||
+                    tokens.equalsIgnoreCase("к") ||
+                    tokens.equalsIgnoreCase("в") ||
+                    tokens.equalsIgnoreCase("с") ||
+                    tokens.equalsIgnoreCase("и") ||
+                    tokens.equalsIgnoreCase("а") ||
+                    tokens.equalsIgnoreCase("б"))){
+                return true;
         }
         return false;
     }

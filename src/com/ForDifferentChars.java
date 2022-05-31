@@ -6,4 +6,10 @@ public interface ForDifferentChars {
     Character forBigLetters(char temp, int cipherKey);
 
     Character forOtherCharacters(char temp);
+
+
+
+
+
+
 }

@@ -6,21 +6,14 @@ public class Encrypter implements ForDifferentChars{
     StringBuilder wordsBuilder = new StringBuilder();// один стрингбилдер чтобы складывать буквы в слова
     StringBuilder sentenceBuilder = new StringBuilder(); // один чтобы предложения
 
-    public String encrypt(String text) {
+    public String changeTextToEncrypted(String text) {
             String[] words = text.split(" ");
             for (int i = 0; i < words.length; i++) { //цикл чтобы пробежать по всем словам в строке
                 char[] wordsChars = words[i].toCharArray();
                 for (int j = 0; j < wordsChars.length; j++) {// цикл для букв
                         char temp = wordsChars[j];
-                        if (Character.isUpperCase(temp)) {
-                            forBigLetters(temp, cipherKey);
-                        } else if (Character.isLowerCase(temp)) {
-                            forSmallLetters(temp, cipherKey);
-                        } else {
-                            forOtherCharacters(temp);
-
-                        }
-                    wordsChars[j] = temp;
+                        encrypt(temp);
+                        wordsChars[j] = temp;
                 }
                 sentenceBuilder.append(wordsBuilder);
                 sentenceBuilder.append(" ");
@@ -32,6 +25,17 @@ public class Encrypter implements ForDifferentChars{
         System.out.println(encryptedText);
         return encryptedText;
     }
+
+    public void encrypt(char temp) {
+        if (Character.isUpperCase(temp)) {
+            forBigLetters(temp, cipherKey);
+        } else if (Character.isLowerCase(temp)) {
+            forSmallLetters(temp, cipherKey);
+        } else {
+            forOtherCharacters(temp);
+        }
+    }
+
      @Override
     public Character forSmallLetters(char temp, int cipherKey) {
         int indexOfAlphabet = alphabet.smallLettersList().indexOf(temp); // ввела эту переменную чтобы зациклить алфавит
@@ -65,6 +69,10 @@ public class Encrypter implements ForDifferentChars{
         }
         return temp;
     }
+
+
+
+
 
 
 }

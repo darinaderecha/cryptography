@@ -12,6 +12,7 @@ public class FileChanger {
     EncodeDecodeWays ways;
     Encrypter encrypt = new Encrypter();
     BruteForceDecoder decoder = new BruteForceDecoder();
+    StatisticAnalysisDecoder decoder2 = new StatisticAnalysisDecoder();
     File src;
     File dst;
 
@@ -36,13 +37,18 @@ public class FileChanger {
 
                 switch (ways) {
                     case ENCRYPT -> {
-                        writer.write(encrypt.encrypt(line));
+                        writer.write(encrypt.changeTextToEncrypted(line));
                         writer.write("\n");
                         writer.flush();
 
                     }
                     case DECODE_BY_BRUTE_FORCE -> {
                         writer.write(decoder.decodeByBruteForce(line));
+                        writer.write("\n");
+                        writer.flush();
+                    }
+                    case DECODE_BY_STATISTIC_ANALYSIS -> {
+                        writer.write(decoder2.decodeByStatisticAnalysis(line));
                         writer.write("\n");
                         writer.flush();
                     }
