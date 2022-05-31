@@ -9,7 +9,7 @@ public class BruteForceDecoder extends Decoder {
 
 
     private int findCipherKey(int cipherKey, String text) {
-        while (wrongTokens != -1 || cipherKey > alphabet.alphabets.size()/2 - 1) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
+        while (wrongTokens != -1 || cipherKey > alphabet.alphabets.size()/2 ) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
             this.cipherKey++;
             String[] tokens = decodingCharactersInText(this.cipherKey, text).split(" ");
             for (int i = 0; i < tokens.length; i++) {

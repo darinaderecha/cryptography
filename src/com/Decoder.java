@@ -31,12 +31,17 @@ public  class Decoder implements ForDifferentChars {
         }
 
         public void decoder(char temp, int cipherKey){
-            if (Character.isUpperCase(temp)) {
-                forBigLetters(temp, cipherKey);
-            } else if (Character.isLowerCase(temp)) {
-                forSmallLetters(temp, cipherKey);
-            } else {
-                forOtherCharacters(temp);
+            try {
+
+                if (Character.isUpperCase(temp)) {
+                    forBigLetters(temp, cipherKey);
+                } else if (Character.isLowerCase(temp)) {
+                    forSmallLetters(temp, cipherKey);
+                } else {
+                    forOtherCharacters(temp);
+                }
+            } catch (ArrayIndexOutOfBoundsException ex){
+                ex.printStackTrace();
             }
 
         }

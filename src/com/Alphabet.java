@@ -1,6 +1,7 @@
 package com;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,9 +9,8 @@ import java.util.Map;
 public class Alphabet {
 
     public List<Character> alphabets;
-    public List<Character> smallLetters;
-    public List<Character> bigLetter;
-    List<Character> points;
+    public List<Character> points;
+    public Map<Character, Integer> caesarCircle;
 
 
     public List<Character> ordinaryAlphabet() {
@@ -23,7 +23,15 @@ public class Alphabet {
         alphabets.add(6, 'Ё');
         alphabets.add(39, 'ё');
         return alphabets;
+    }
+    public Map<Character, Integer> fillCaesarCircle(){
+        int i = 0;
+        caesarCircle  = new HashMap<>();
+        for(char c: ordinaryAlphabet()){
+            caesarCircle.put(c, i);
 
+        }
+        return caesarCircle;
     }
     public List<Character> smallLettersList(){
         alphabets = ordinaryAlphabet();

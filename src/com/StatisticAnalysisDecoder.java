@@ -1,98 +1,55 @@
 package com;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 
 
 public class StatisticAnalysisDecoder extends Decoder {
 
     private int cipherKey = 0;
-    private static int wrongTokens = 0;
+    StringBuilder builder = new StringBuilder();
+    char popularLetter;
 
     public String decodeByStatisticAnalysis(String text) {
-        cipherKey = findCipherKey(text);
+        cipherKey = findCipherKey(popularLetter);
         return decodingCharactersInText(cipherKey, text);
 
-
     }
-// написать цикл которій посчитает количесво
 
-    private int findCipherKey(String text) {
-        if (!countMostCommonLetters(text)) {
-            wrongTokens++;
-            System.out.println(cipherKey);
-        }
-        return 1;
+    private int findCipherKey(char letter){
+        char mostFrequentLetterInRussian = 'о';
+        char popularLetterInEncryptedText = letter;
+        cipherKey = alphabet.smallLettersList().indexOf(mostFrequentLetterInRussian - popularLetterInEncryptedText);
+        return cipherKey;
+
     }
 
 
 
-
-
-
-//    private int findCipherKey(String text) {
-//        String wholeText = null;
-//        while (wrongTokens != -1) {
-//            this.cipherKey++;
-//            String[] tokens = decodingCharactersInText(cipherKey, text).split(" ");
-//            for (int i = 0; i < tokens.length; i++) {
-//                if ( !hasCorrectOneLetterWords(tokens[i])
-//                        && hasNoVowelsInBigWord(tokens[i])
-//                        && haveLotVowelsOrConsonantsTogether(tokens[i])
-//                        && !doesStartCorrectly(tokens[i])) {
-//                    wrongTokens++;
-//
-//                }
-//                if (wrongTokens == 0) {
-//                    return wrongTokens--;
-//                } else {
-//                    return wrongTokens = 0;
-//                }
-//
-//            }
-//        }
-//        return cipherKey;
-//    }
-
-
-    public boolean countMostCommonLetters(String text) {
-
-        char[] chars = text.trim().toCharArray();
-        int oCount = 0;
-        int aCount = 0;
-        int eCount = 0;
-        for (int i = 0; i < chars.length; i++) {
-            if (chars[i] == 'о') {
-                oCount++;
-            } else if (chars[i] == 'а') {
-                aCount++;
-            } else if (chars[i] == 'е') {
-                eCount++;
-            }
+    private String theWholeText(String text) {
+        if (text.length() < 3000) {
+            builder.append(text);
 
         }
-        if(((oCount * 1.0 * chars.length) / 100 >= 0.09)
-                && (eCount *1.0 * chars.length) / 100 >= 0.08
-                && (aCount * 1.0 * chars.length)/100 >= 0.078){
-            return true;
+        return String.valueOf(builder.append(text));
+    }
+    private char statisticAnalysisOfUsingLetters(String text){
+        String textForStatisticAnalysis = theWholeText(text.trim());
+        Map<Character, Integer> countLetters = alphabet.fillCaesarCircle();
+        char popularLetter;
+        for (char c: textForStatisticAnalysis.toCharArray()){
+                countLetters.computeIfPresent(c, (k, v) -> v = v + 1);
         }
-        return false;
+        popularLetter = countLetters
+                .entrySet()
+                .stream()
+                .max((entry1, entry2) -> entry1.getValue() > entry2.getValue() ? 1 : -1).get().getKey();
+
+        return popularLetter;
+
     }
 
-    //проверка на корректные прелоги, местоимения
-    public static boolean hasCorrectOneLetterWords(String tokens){
-        if(tokens.length() == 1 &&(tokens.equalsIgnoreCase("я") ||
-                tokens.equalsIgnoreCase("о") ||
-                tokens.equalsIgnoreCase("у") ||
-                tokens.equalsIgnoreCase("к") ||
-                tokens.equalsIgnoreCase("в") ||
-                tokens.equalsIgnoreCase("с") ||
-                tokens.equalsIgnoreCase("и") ||
-                tokens.equalsIgnoreCase("а") ||
-                tokens.equalsIgnoreCase("б"))){
-            return true;
-        }
-        return false;
-    }
+
 }
 
 
