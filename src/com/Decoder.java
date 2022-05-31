@@ -41,9 +41,7 @@ public  class Decoder implements ForDifferentChars {
 
         }
 
-        public int calculateWrongTokens(int wrong){
 
-        }
 
     @Override
     public Character forBigLetters(char temp, int cipherKey) {

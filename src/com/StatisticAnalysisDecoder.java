@@ -14,29 +14,44 @@ public class StatisticAnalysisDecoder extends Decoder {
 
 
     }
-    public int findCipherKey(String text) {
-        while (wrongTokens != -1) {
-            cipherKey++;
-            String[] tokens = decodingCharactersInText(cipherKey, text).split(" ");
-            for (int i = 0; i < tokens.length; i++) {
-                if ( !hasCorrectOneLetterWords(tokens[i])
-                        && hasNoVowelsInBigWord(tokens[i])
-                        && haveLotVowelsOrConsonantsTogether(tokens[i])
-                        && !doesStartCorrectly(tokens[i])) {
-                    wrongTokens++;
+// написать цикл которій посчитает количесво
 
-                }
-
-                if (wrongTokens == 0) {
-                    wrongTokens--;
-                } else {
-                    wrongTokens = 0;
-                }
-
-            }
+    private int findCipherKey(String text) {
+        if (!countMostCommonLetters(text)) {
+            wrongTokens++;
+            System.out.println(cipherKey);
         }
-        return cipherKey;
+        return 1;
     }
+
+
+
+
+
+
+//    private int findCipherKey(String text) {
+//        String wholeText = null;
+//        while (wrongTokens != -1) {
+//            this.cipherKey++;
+//            String[] tokens = decodingCharactersInText(cipherKey, text).split(" ");
+//            for (int i = 0; i < tokens.length; i++) {
+//                if ( !hasCorrectOneLetterWords(tokens[i])
+//                        && hasNoVowelsInBigWord(tokens[i])
+//                        && haveLotVowelsOrConsonantsTogether(tokens[i])
+//                        && !doesStartCorrectly(tokens[i])) {
+//                    wrongTokens++;
+//
+//                }
+//                if (wrongTokens == 0) {
+//                    return wrongTokens--;
+//                } else {
+//                    return wrongTokens = 0;
+//                }
+//
+//            }
+//        }
+//        return cipherKey;
+//    }
 
 
     public boolean countMostCommonLetters(String text) {
@@ -61,11 +76,27 @@ public class StatisticAnalysisDecoder extends Decoder {
             return true;
         }
         return false;
-
     }
 
-
-
-
-
+    //проверка на корректные прелоги, местоимения
+    public static boolean hasCorrectOneLetterWords(String tokens){
+        if(tokens.length() == 1 &&(tokens.equalsIgnoreCase("я") ||
+                tokens.equalsIgnoreCase("о") ||
+                tokens.equalsIgnoreCase("у") ||
+                tokens.equalsIgnoreCase("к") ||
+                tokens.equalsIgnoreCase("в") ||
+                tokens.equalsIgnoreCase("с") ||
+                tokens.equalsIgnoreCase("и") ||
+                tokens.equalsIgnoreCase("а") ||
+                tokens.equalsIgnoreCase("б"))){
+            return true;
+        }
+        return false;
+    }
 }
+
+
+
+
+
+

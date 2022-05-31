@@ -3,6 +3,7 @@ package com;
 public class Encrypter implements ForDifferentChars{
     private final static int cipherKey = 10;
     Alphabet alphabet = new Alphabet();
+
     StringBuilder wordsBuilder = new StringBuilder();// один стрингбилдер чтобы складывать буквы в слова
     StringBuilder sentenceBuilder = new StringBuilder(); // один чтобы предложения
 
@@ -22,7 +23,7 @@ public class Encrypter implements ForDifferentChars{
             String encryptedText = String.valueOf(sentenceBuilder);
             sentenceBuilder.delete(0, sentenceBuilder.length());
 
-        System.out.println(encryptedText);
+
         return encryptedText;
     }
 
