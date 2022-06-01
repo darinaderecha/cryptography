@@ -29,7 +29,6 @@ public class Alphabet {
         caesarCircle  = new HashMap<>();
         for(char c: ordinaryAlphabet()){
             caesarCircle.put(c, i);
-
         }
         return caesarCircle;
     }

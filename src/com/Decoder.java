@@ -50,6 +50,9 @@ public  class Decoder implements ForDifferentChars {
 
     @Override
     public Character forBigLetters(char temp, int cipherKey) {
+            if (cipherKey < 0){
+                key = key * -1;
+            }
         int index = alphabet.bigLetterList().indexOf(temp);
         if(index > alphabet.bigLetterList().size() - 1 - key){
             temp = alphabet.bigLetterList().get(index + key - alphabet.bigLetterList().size());
@@ -62,6 +65,9 @@ public  class Decoder implements ForDifferentChars {
 
     @Override
     public Character forSmallLetters(char temp, int cipherKey) {
+        if (cipherKey < 0){
+            key = key * -1;
+        }
         int index = alphabet.smallLettersList().indexOf(temp);
         if(index > alphabet.smallLettersList().size() - 1 - key){
            temp = alphabet.smallLettersList().get(index + key - alphabet.smallLettersList().size());
