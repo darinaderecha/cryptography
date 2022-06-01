@@ -6,9 +6,15 @@ public class BruteForceDecoder extends Decoder {
     private int cipherKey = 0;
     private int wrongTokens = 0;
 
+    public String decodeByBruteForce(String text) {
+        return decodingCharactersInText(findCipherKey(cipherKey, text), text);
+
+
+    }
+
 
     private int findCipherKey(int cipherKey, String text) {
-        while (wrongTokens != -1 || cipherKey > alphabet.alphabets.size()/2 ) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
+        while (wrongTokens != -1 || cipherKey > alphabet.alphabets.size() / 2) { //проверка на правильность подбора шифра и вообще подходит ли// шифра и вообще подходит ли
             this.cipherKey++;
             String[] tokens = decodingCharactersInText(this.cipherKey, text).split(" ");
             for (int i = 0; i < tokens.length; i++) {
@@ -23,17 +29,11 @@ public class BruteForceDecoder extends Decoder {
                 wrongTokens = 0;
             }
 
-        }   return this.cipherKey;
+        }
+        return this.cipherKey;
     }
 
 
-
-    public String decodeByBruteForce(String text) {
-        int key = findCipherKey(cipherKey, text);
-        return decodingCharactersInText(cipherKey, text);
-
-
-    }
 }
 
 
