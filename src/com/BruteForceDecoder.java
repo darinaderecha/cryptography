@@ -1,11 +1,10 @@
 package com;
 
-import com.Decoder;
 
 public class BruteForceDecoder extends Decoder {
 
     private int cipherKey = 0;
-   private int wrongTokens = 0;
+    private int wrongTokens = 0;
 
 
     private int findCipherKey(int cipherKey, String text) {
@@ -36,3 +35,5 @@ public class BruteForceDecoder extends Decoder {
 
     }
 }
+
+

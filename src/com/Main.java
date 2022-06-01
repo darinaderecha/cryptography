@@ -2,8 +2,7 @@ package com;
 
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+;
 import java.util.Scanner;
 
 
@@ -16,14 +15,18 @@ public class Main {
         + "Если хочешь расшифровать методом Brute Force - введи \"2\"  \n" +
                 "Если расшифровать методом статистического анализа - \"3\"" );
         int i = scanner.nextInt();
-        if (i == 1){
-            changer = new FileChanger(EncodeDecodeWays.ENCRYPT);
-        } else if(i == 2){
-            changer = new FileChanger(EncodeDecodeWays.DECODE_BY_BRUTE_FORCE);
-        } else {
-            changer = new FileChanger(EncodeDecodeWays.DECODE_BY_STATISTIC_ANALYSIS);
+        try {
+            if (i == 1) {
+                changer = new FileChanger(EncodeDecodeWays.ENCRYPT);
+            } else if (i == 2) {
+                changer = new FileChanger(EncodeDecodeWays.DECODE_BY_BRUTE_FORCE);
+            } else {
+                changer = new FileChanger(EncodeDecodeWays.DECODE_BY_STATISTIC_ANALYSIS);
+            }
+            changer.getTargetFile();
+        } catch (IllegalArgumentException ex){
+            ex.getMessage();
         }
-        changer.getTargetFile();
 
 
 
